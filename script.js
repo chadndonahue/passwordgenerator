@@ -22,12 +22,12 @@ function generatePassword() {
   var password = ""
 
   var passwordLength = prompt("Please select a password length between 8 and 128")
-  if(!passwordLength) 
+  if(!passwordLength)
   return
 
   // isNan checks if a number is entered or not and will return false if it is not a number
 
-  if(isNaN)(passwordLength) {
+  if(isNaN(passwordLength)) {
     alert("only enter a number dingus")
     return
   }
@@ -41,21 +41,30 @@ function generatePassword() {
     alert("man it says right there 128 or less")
     return
   }
+  // This adds lowercase to password characters if confirmed
+  var lowercaseAnswer = confirm("Click confirm for lowercase letters")
+  if(lowercaseAnswer) passwordCharacters += lowerCase
+  // This adds uppercase to password characters if confirmed
+  var uppercaseAnswer = confirm("Click confirm for uppercase letters")
+  if(uppercaseAnswer) passwordCharacters += upperCase
+  // This adds numbers to password characters if confirmed
+  var numberAnswer = confirm("Click confirm for numbers")
+  if(numberAnswer) passwordCharacters += numbers
+  // This adds special characters to special characters if confirmed
+  var specialAnswer = confirm("Click confirm for special characters")
+  if(specialAnswer) passwordCharacters += specialChar
+  // If the password has nothing it gives this message and returns them back
+  if(passwordCharacters.length == 0) {
+    alert("You must add one character type")
+    return
+  }
+  // this while loops keeps grabbing until it is the same length.
+  while(password.length < passwordLength) {
+    password += passwordCharacters.charAt(Math.floor(Math.random() * passwordCharacters.length));
+    console.log(password)
+  }
+  return password
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Add event listener to generate button
